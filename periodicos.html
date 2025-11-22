@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR" id="periodicosPage">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Unifor Books — Periódicos</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="topbar">
+      <div class="logo">
+        <div class="logo-mark">CB</div>
+        <div class="logo-text"><strong>Unifor</strong><span>Livros</span></div>
+      </div>
+      <nav class="nav">
+        <a href="index.html">Início</a>
+        <a href="acervo.html">Acervo</a>
+        <a class="active" href="periodicos.html">Periódicos</a>
+        <a href="renovacao.html">Renovação</a>
+        <a href="emprestimos.html">Empréstimos</a>
+        <a href="historico.html">Histórico</a>
+        <a href="#" id="logoutLink">Sair</a>
+      </nav>
+      <div class="user">
+        <img class="avatar" alt="user" src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?q=80&w=200&auto=format&fit=crop"/>
+        <span class="chev">▾</span>
+      </div>
+    </header>
+    <main class="grid single-grid">
+      <section class="full-width">
+        <h2 class="block-title">Periódicos Acadêmicos</h2>
+        <div class="f-group">
+          <input id="pBusca" type="text" placeholder="Buscar título ou ISSN" />
+        </div>
+        <div id="listaPeriodicos" class="periodicos-list"></div>
+      </section>
+    </main>
+  </div>
+  <script src="auth.js"></script>
+  <script src="loanStore.js"></script>
+  <script>Auth.requireAuth(); const oc=LoanStore.getOverdueCount(); if(oc>0){ const b=document.createElement('div'); b.className='overdue-banner'; b.textContent=`Você possui ${oc} empréstimo(s) em atraso.`; document.querySelector('.page').insertBefore(b, document.querySelector('main')); }</script>
+  <script src="periodicos.js"></script>
+</body>
+</html>

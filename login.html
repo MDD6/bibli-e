@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR" id="loginPage">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Unifor Books — Login</title>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body class="login-body">
+  <div class="login-wrapper">
+    <div class="login-card">
+      <div class="logo login-logo">
+        <div class="logo-mark">CB</div>
+        <div class="logo-text"><strong>Unifor</strong><span>Livros</span></div>
+      </div>
+      <h1>Entrar</h1>
+      <p class="login-sub">Acesse o acervo com suas credenciais.</p>
+      <form id="loginForm" autocomplete="off">
+        <div class="f-group">
+          <label for="user">Usuário</label>
+          <input id="user" name="user" type="text" required placeholder="aluno" />
+        </div>
+        <div class="f-group">
+          <label for="pass">Senha</label>
+          <input id="pass" name="pass" type="password" required placeholder="••••••" />
+        </div>
+        <button class="btn-go login-btn" type="submit">Acessar</button>
+        <div id="loginMsg" class="login-msg" aria-live="polite"></div>
+      </form>
+      <div class="cred-hint">
+        <strong>Demo:</strong> aluno / unifor123<br/> bibliotecario / admin2025
+      </div>
+    </div>
+  </div>
+
+  <script src="auth.js"></script>
+  <script>
+    if(Auth.isAuthenticated()) { window.location.replace('index.html'); }
+    const form = document.getElementById('loginForm');
+    const msg = document.getElementById('loginMsg');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const u = form.user.value.trim();
+      const p = form.pass.value.trim();
+      msg.textContent = 'Verificando...';
+      const res = Auth.login(u,p);
+      if(res.ok){ msg.textContent = 'Sucesso! Redirecionando...'; setTimeout(()=>window.location.replace('index.html'), 500); }
+      else { msg.textContent = res.message; msg.classList.add('error'); }
+    });
+  </script>
+</body>
+</html>

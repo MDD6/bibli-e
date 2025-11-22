@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR" id="acervoPage">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Unifor Books — Acervo</title>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+  <div class="page">
+    <header class="topbar">
+      <div class="logo">
+        <div class="logo-mark">CB</div>
+        <div class="logo-text">
+          <strong>Unifor</strong>
+          <span>Livros</span>
+        </div>
+      </div>
+      <nav class="nav">
+        <a href="index.html">Início</a>
+        <a class="active" href="acervo.html">Acervo</a>
+        <a href="games.html">Games</a>
+        <a href="periodicos.html">Periódicos</a>
+        <a href="renovacao.html">Renovação</a>
+        <a href="emprestimos.html">Empréstimos</a>
+        <a href="historico.html">Histórico</a>
+        <a href="#" id="logoutLink">Sair</a>
+      </nav>
+      <div class="user">
+        <img class="avatar" alt="user"
+             src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?q=80&w=200&auto=format&fit=crop"/>
+        <span class="chev">▾</span>
+      </div>
+    </header>
+
+    <main class="grid acervo-grid">
+      <aside class="acervo-filtros">
+        <h2 class="block-title">Filtros</h2>
+        <div class="f-group">
+          <label for="fBusca">Busca</label>
+          <input id="fBusca" type="text" placeholder="Título ou Autor" />
+        </div>
+        <div class="f-group">
+          <span class="f-label">Áreas</span>
+          <div class="check-list" id="fAreas">
+            <!-- preenchido via JS -->
+          </div>
+        </div>
+        <div class="f-group">
+          <span class="f-label">Séculos</span>
+          <div class="check-list" id="fSeculos"></div>
+        </div>
+        <div class="f-group">
+          <label for="fOrdenar">Ordenar por</label>
+          <select id="fOrdenar">
+            <option value="titulo">Título</option>
+            <option value="autor">Autor</option>
+            <option value="rating">Avaliação</option>
+            <option value="categoria">Área</option>
+            <option value="seculo">Século</option>
+          </select>
+        </div>
+        <div class="f-actions">
+          <button id="btnLimpar" class="btn-go alt">Limpar</button>
+        </div>
+        <div class="fav-box">
+          <h3>Favoritos</h3>
+          <div id="listaFavoritos" class="fav-list"></div>
+        </div>
+      </aside>
+
+      <section class="acervo-conteudo">
+        <div class="acervo-header">
+          <h2 class="block-title">Acervo Completo</h2>
+          <div class="stats">
+            <span id="totalCount">0 títulos</span>
+            <span id="dispCount">0 disponíveis</span>
+          </div>
+        </div>
+        <div id="livrosGrid" class="books acervo-books"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="auth.js"></script>
+  <script src="loanStore.js"></script>
+  <script>Auth.requireAuth(); const s=Auth.currentSession(); if(s){ const userEl=document.querySelector('.user .avatar'); userEl.setAttribute('title', s.user + ' ('+s.role+')'); } const oc=LoanStore.getOverdueCount(); if(oc>0){ const b=document.createElement('div'); b.className='overdue-banner'; b.textContent = `Você possui ${oc} empréstimo(s) em atraso.`; document.querySelector('.page').insertBefore(b, document.querySelector('main')); }</script>
+  <script src="script.js"></script>
+  <script src="acervo.js"></script>
+</body>
+</html>
