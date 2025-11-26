@@ -16,9 +16,13 @@ const loans = LoanStore.getLoans();
 assert.ok(Array.isArray(loans) && loans.length>0, 'Seed de empréstimos carregado');
 
 // Test renovar limites
-const primeiro = loans[0];
-const resultadoRenov = LoanStore.renovar(primeiro.codigo, 3);
-assert.ok(resultadoRenov.ok, 'Renovação deve funcionar');
+// Ajusta empréstimo para garantir não estar em atraso (usa segundo se existir)
+const alvo = loans[1] || loans[0];
+const tomorrow = new Date(); tomorrow.setDate(tomorrow.getDate()+1);
+alvo.vence = tomorrow.toISOString().slice(0,10);
+LoanStore.saveLoans(loans);
+const resultadoRenov = LoanStore.renovar(alvo.codigo, 3);
+assert.ok(resultadoRenov.ok, 'Renovação deve funcionar após ajuste de data');
 
 // Test reserva livro duplicada
 const res1 = LoanStore.reservarLivro('Dom Casmurro','aluno');
