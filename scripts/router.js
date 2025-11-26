@@ -8,7 +8,8 @@
     '/historico': 'views/historico.html',
     '/games': 'views/games.html',
     '/admin': 'views/admin.html',
-    '/buscar': 'views/search.html'
+    '/buscar': 'views/search.html',
+    '/login': 'views/login.html'
   };
 
   async function load(url){
@@ -26,7 +27,12 @@
       else if(url.includes('games')){ ensureScript('scripts/loanStore.js'); ensureScript('scripts/games.js'); }
       else if(url.includes('search')){ ensureScript('scripts/searchView.js'); }
       else if(url.includes('admin')){ ensureScript('scripts/admin.js'); }
+      else if(url.includes('login')){ ensureScript('scripts/login.js'); }
       else { ensureScript('scripts/script.js'); }
+      // Ajustar visibilidade da barra de navegação conforme login
+      const topbar = document.querySelector('.topbar');
+      if(url.includes('login')){ if(topbar) topbar.style.display='none'; }
+      else { if(topbar) topbar.style.display='flex'; }
     }catch(e){ app.innerHTML = '<div class="muted">Falha ao carregar a view.</div>'; }
   }
 
@@ -44,6 +50,14 @@
   }
 
   function navigate(path){
+    // Se rota login e usuário autenticado, redireciona para home
+    if(path === '/login' && window.Auth && Auth.isAuthenticated()) {
+      path = '/';
+    }
+    // Bloqueia rotas protegidas se não autenticado
+    if(path !== '/login' && window.Auth && !Auth.isAuthenticated()) {
+      path = '/login';
+    }
     const url = routes[path] || routes['/'];
     history.pushState({ path }, '', '#'+path);
     updateActive(path);
@@ -56,8 +70,12 @@
   }
 
   function init(){
-    // Guard de auth
-    if(window.Auth){ Auth.requireAuth(); }
+    const initial = (location.hash.replace('#','') || '/');
+    if(window.Auth){
+      if(!Auth.isAuthenticated() && initial !== '/login') {
+        location.hash = '#/login';
+      }
+    }
     // Bind nav
     document.querySelectorAll('.nav a').forEach(a=> a.addEventListener('click', onLinkClick));
     // Initial route

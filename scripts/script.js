@@ -17,6 +17,16 @@ let booksData = [
   { title: "Administração Estratégica", author: "Chiavenato", rating: 4.6, reviews: "27 k avaliações", category: "Administração", century: "XXI", img: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?q=80&w=800&auto=format&fit=crop" },
   { title: "História da Arquitetura", author: "Benevolo", rating: 4.5, reviews: "18 k avaliações", category: "Arquitetura", century: "XX", img: "https://images.unsplash.com/photo-1512820790803-83ca734da794?q=80&w=800&auto=format&fit=crop" },
   { title: "Iracema", author: "José de Alencar", rating: 4.6, reviews: "33 k avaliações", category: "Literatura", century: "XIX", img: "https://images.unsplash.com/photo-1543002588-bfa74002ed7e?q=80&w=800&auto=format&fit=crop" }
+  { title: "Fundamentos de Física", author: "Halliday & Resnick", rating: 4.7, reviews: "52 k avaliações", category: "Tecnologia", century: "XX", img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800&auto=format&fit=crop" },
+  { title: "Bioquímica Básica", author: "Lehninger", rating: 4.6, reviews: "29 k avaliações", category: "Medicina", century: "XXI", img: "https://images.unsplash.com/photo-1581092795360-590d757da7d2?q=80&w=800&auto=format&fit=crop" },
+  { title: "Introdução à Programação em Python", author: "Guttag", rating: 4.5, reviews: "21 k avaliações", category: "Tecnologia", century: "XXI", img: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop" },
+  { title: "Engenharia de Software Moderna", author: "Sommerville", rating: 4.6, reviews: "34 k avaliações", category: "Tecnologia", century: "XXI", img: "https://images.unsplash.com/photo-1537432376769-00a2e7b441d1?q=80&w=800&auto=format&fit=crop" },
+  { title: "Psicologia Cognitiva", author: "Sternberg", rating: 4.5, reviews: "19 k avaliações", category: "Psicologia", century: "XXI", img: "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?q=80&w=800&auto=format&fit=crop" },
+  { title: "Neuroanatomia Clínica", author: "Snell", rating: 4.4, reviews: "15 k avaliações", category: "Medicina", century: "XXI", img: "https://images.unsplash.com/photo-1581091870627-3b5e87d9c89b?q=80&w=800&auto=format&fit=crop" },
+  { title: "Administração Financeira", author: "Gitman", rating: 4.5, reviews: "26 k avaliações", category: "Administração", century: "XXI", img: "https://images.unsplash.com/photo-1554224154-22dec7ec8818?q=80&w=800&auto=format&fit=crop" },
+  { title: "Arquitetura Sustentável", author: "Ken Yeang", rating: 4.3, reviews: "11 k avaliações", category: "Arquitetura", century: "XXI", img: "https://images.unsplash.com/photo-1505842465776-3d90f616310d?q=80&w=800&auto=format&fit=crop" },
+  { title: "Inteligência Artificial", author: "Russell & Norvig", rating: 4.8, reviews: "61 k avaliações", category: "Tecnologia", century: "XXI", img: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?q=80&w=800&auto=format&fit=crop" },
+  { title: "Data Science Aplicada", author: "Provost & Fawcett", rating: 4.6, reviews: "32 k avaliações", category: "Tecnologia", century: "XXI", img: "https://images.unsplash.com/photo-1518186285589-2f7649de83e0?q=80&w=800&auto=format&fit=crop" }
 ];
 
 const lastRequestData = [
@@ -108,9 +118,23 @@ if(catSel){ catSel.addEventListener("change", applyFilter); }
 const cenSel = document.getElementById("century");
 if(cenSel){ cenSel.addEventListener("change", applyFilter); }
 
-// Logout link se existir
+// Logout link & header user role
 const logoutLink = document.getElementById('logoutLink');
 if(logoutLink){ logoutLink.addEventListener('click', e => { e.preventDefault(); if(window.Auth) Auth.logout(); }); }
+const topUser = document.querySelector('.user');
+if(topUser && window.Auth){
+  const sess = Auth.currentSession();
+  if(sess){
+    let roleSpan = topUser.querySelector('.role-label');
+    if(!roleSpan){ roleSpan = document.createElement('span'); roleSpan.className='role-label'; topUser.appendChild(roleSpan); }
+    roleSpan.textContent = sess.role;
+    roleSpan.style.fontSize='11px';
+    roleSpan.style.background='#f1f5f9';
+    roleSpan.style.padding='4px 8px';
+    roleSpan.style.borderRadius='10px';
+    roleSpan.style.fontWeight='600';
+  }
+}
 
 // init
 renderWriters();

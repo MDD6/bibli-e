@@ -13,7 +13,7 @@
 body{
   margin:0;
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  background: var(--bg);
+  background: linear-gradient(135deg,#9aa6ad 0%, #b5c0c6 50%, #d2d8dc 100%);
   color: var(--text);
 }
 
@@ -61,12 +61,14 @@ body{
 .nav a{
   text-decoration:none; color:#111827; opacity:.8; position:relative;
   padding:6px 0;
+  transition:color .2s, opacity .2s;
 }
 .nav a.active{ opacity:1; font-weight:700;}
 .nav a.active::after{
   content:""; position:absolute; left:0; right:0; bottom:-10px;
   height:2px; background:#111827; border-radius:2px;
 }
+.nav a:hover{ opacity:1; }
 
 .user{ display:flex; align-items:center; gap:6px;}
 .avatar{
@@ -288,6 +290,7 @@ select{
 .book-card{
   background:#fff; border:1px solid var(--line);
   border-radius:16px; padding:8px;
+  display:flex; flex-direction:column; transition: box-shadow .25s, transform .25s;
 }
 .book-card img{
   width:100%; height:160px; border-radius:12px; object-fit:cover;
@@ -302,6 +305,19 @@ select{
 .book-card .rate{
   font-size:11px; margin-top:2px; display:flex; align-items:center; gap:6px;
 }
+.book-card:hover{ box-shadow:0 6px 18px rgba(15,23,42,.18); transform:translateY(-3px); }
+
+/* LOGIN VIEW SIMPLE STYLING */
+.login-view{ display:flex; align-items:center; justify-content:center; min-height:70vh; padding:40px 20px; }
+.login-view .login-card{ width:100%; max-width:380px; }
+.login-card form{ display:flex; flex-direction:column; gap:14px; }
+.login-card input{ width:100%; border:1px solid var(--line); border-radius:12px; padding:10px 12px; font-size:14px; }
+.login-btn{ background:#0f172a; color:#fff; border:none; padding:12px; border-radius:14px; font-weight:600; cursor:pointer; }
+.login-btn:hover{ background:#1e293b; }
+.login-msg.success{ color:#16a34a; }
+.login-msg.error{ color:#dc2626; }
+.tips ul{ margin:6px 0 0; padding-left:18px; font-size:12px; }
+.tips li{ margin-bottom:4px; }
 
 /* RESPONSIVO */
 @media (max-width: 980px){

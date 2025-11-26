@@ -8,7 +8,12 @@
     { id:'uno', titulo:'UNO', categoria:'Party', total:4 },
     { id:'xadrez', titulo:'Xadrez', categoria:'Clássico', total:6 },
     { id:'monopoly', titulo:'Monopoly', categoria:'Clássico', total:2 },
-    { id:'mathlogic', titulo:'Math Logic', categoria:'Educativo', total:3 }
+    { id:'mathlogic', titulo:'Math Logic', categoria:'Educativo', total:3 },
+    { id:'carcassonne', titulo:'Carcassonne', categoria:'Estratégia', total:3 },
+    { id:'azul', titulo:'Azul', categoria:'Estratégia', total:4 },
+    { id:'splendor', titulo:'Splendor', categoria:'Estratégia', total:2 },
+    { id:'pandemic', titulo:'Pandemic', categoria:'Cooperativo', total:3 },
+    { id:'dixit', titulo:'Dixit', categoria:'Party', total:5 }
   ];
   // Inventário persistente
   const inventarioGames = LoanStore.getInventoryGames(jogos);
