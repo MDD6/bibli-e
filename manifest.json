@@ -1,0 +1,11 @@
+{
+  "name": "Unifor Books Biblioteca",
+  "short_name": "UniforBooks",
+  "start_url": "index.html",
+  "display": "standalone",
+  "scope": "./",
+  "background_color": "#ffffff",
+  "theme_color": "#0f172a",
+  "description": "SPA da biblioteca universitária com acesso ao acervo, empréstimos e periódicos.",
+  "lang": "pt-BR"
+}

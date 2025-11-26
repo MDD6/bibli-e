@@ -1,0 +1,15 @@
+<section class="renovacao-view">
+  <main class="grid single-grid">
+    <section class="full-width">
+      <h2 class="block-title">Renovar Empréstimo</h2>
+      <form id="formRenovacao" class="renov-form">
+        <div class="f-group"><label for="codigo">Código do Empréstimo</label><input id="codigo" required placeholder="EX: EMP123" /></div>
+        <div class="f-group"><label for="dias">Dias adicionais</label><select id="dias" required><option value="7">7 dias</option><option value="14">14 dias</option><option value="21">21 dias</option></select></div>
+        <button class="btn-go" type="submit">Renovar</button>
+        <div id="renovMsg" class="login-msg" aria-live="polite"></div>
+      </form>
+      <h3>Empréstimos Próximos do Vencimento</h3>
+      <div id="listaRenovacao" class="renov-list"></div>
+    </section>
+  </main>
+</section>

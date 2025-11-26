@@ -1,0 +1,17 @@
+<div id="searchPage" class="grid single-grid">
+  <div class="full-width">
+    <h2 class="block-title">Busca Global</h2>
+    <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+      <input id="searchInput" type="text" placeholder="Termo..." style="flex:1; border:1px solid var(--line); border-radius:12px; padding:8px 10px;" />
+      <select id="searchTipo" style="height:38px; border:1px solid var(--line); border-radius:12px; padding:0 10px;">
+        <option value="">Todos</option>
+        <option value="Livro">Livros</option>
+        <option value="Periódico">Periódicos</option>
+        <option value="Game">Games</option>
+      </select>
+      <button id="searchExport" class="btn-go" style="height:38px;">Exportar CSV</button>
+    </div>
+    <div id="searchStats" class="muted" style="margin:8px 4px 4px;"></div>
+    <div id="searchResults" style="display:grid; gap:8px; padding:4px 2px;"></div>
+  </div>
+</div>

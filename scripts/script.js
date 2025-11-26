@@ -32,6 +32,7 @@ function stars(r){
 
 function renderWriters(){
   const box = document.getElementById("writers");
+  if(!box) return;
   box.innerHTML = writersData.map(w => `
     <div class="writer-card">
       <img src="${w.img}" alt="${w.name}">
@@ -45,6 +46,7 @@ function renderWriters(){
 
 function renderBooks(list){
   const box = document.getElementById("books");
+  if(!box) return;
   box.innerHTML = list.map(b => `
     <div class="book-card">
       <img src="${b.img}" alt="${b.title}">
@@ -59,6 +61,7 @@ function renderBooks(list){
 
 function renderLast(){
   const box = document.getElementById("lastList");
+  if(!box) return;
   box.innerHTML = lastRequestData.map((l,i)=>`
     <div class="last-item">
       <div>${i+1}</div>
@@ -75,9 +78,14 @@ function renderLast(){
 }
 
 function applyFilter(){
-  const q = document.getElementById("q").value.trim().toLowerCase();
-  const cat = document.getElementById("category").value;
-  const cen = document.getElementById("century").value;
+  const qEl = document.getElementById("q");
+  const catEl = document.getElementById("category");
+  const cenEl = document.getElementById("century");
+  if(!qEl || !catEl || !cenEl) return;
+
+  const q = qEl.value.trim().toLowerCase();
+  const cat = catEl.value;
+  const cen = cenEl.value;
 
   const filtered = booksData.filter(b=>{
     const matchQ = !q || b.title.toLowerCase().includes(q) || b.author.toLowerCase().includes(q);
@@ -89,16 +97,22 @@ function applyFilter(){
   renderBooks(filtered);
 }
 
-document.getElementById("go").addEventListener("click", applyFilter);
-document.getElementById("q").addEventListener("input", applyFilter);
-document.getElementById("category").addEventListener("change", applyFilter);
-document.getElementById("century").addEventListener("change", applyFilter);
+const goBtn = document.getElementById("go");
+if(goBtn){
+  goBtn.addEventListener("click", applyFilter);
+}
+const qInput = document.getElementById("q");
+if(qInput){ qInput.addEventListener("input", applyFilter); }
+const catSel = document.getElementById("category");
+if(catSel){ catSel.addEventListener("change", applyFilter); }
+const cenSel = document.getElementById("century");
+if(cenSel){ cenSel.addEventListener("change", applyFilter); }
 
-// init
 // Logout link se existir
 const logoutLink = document.getElementById('logoutLink');
 if(logoutLink){ logoutLink.addEventListener('click', e => { e.preventDefault(); if(window.Auth) Auth.logout(); }); }
 
+// init
 renderWriters();
 renderLast();
 renderBooks(booksData);

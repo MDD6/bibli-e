@@ -3,13 +3,14 @@
   if(!document.getElementById('acervoPage')) return; // só executa nesta página
 
   // Reuso de booksData do script.js. Gerar disponibilidade simulada.
+  // Inventário persistente via LoanStore
+  const inventarioBase = LoanStore.getInventoryLivros(booksData);
   const EXTENDED = booksData.map(b => {
-    const total = Math.floor(Math.random()*5)+3; // 3-7 exemplares
-    const disponiveis = Math.floor(Math.random()*total); // 0..total-1
+    const inv = inventarioBase.find(i=> i.titulo===b.title) || { total:3, disponiveis:1 };
     return {
       ...b,
-      total,
-      disponiveis,
+      total: inv.total,
+      disponiveis: inv.disponiveis,
       id: b.title.toLowerCase().replace(/[^a-z0-9]+/g,'-')
     };
   });
@@ -139,7 +140,26 @@
     grid.innerHTML = lista.map(b => {
       const fav = favoritos.includes(b.id) ? 'fav-on' : 'fav-off';
       const badgeDisp = b.disponiveis>0 ? `<span class="badge disp">${b.disponiveis}/${b.total} disp.</span>` : `<span class="badge indisp">0/${b.total} indisponível</span>`;
-      const reservarBtn = b.disponiveis===0 ? `<button class="reserve-btn" data-title="${b.title}" data-user="${user}">Reservar</button>` : '';
+      let filaInfo = '';
+      let reservarBtn = '';
+      if(b.disponiveis===0){
+        const reservas = (window.LoanStore && LoanStore.getReservasLivros()) ? LoanStore.getReservasLivros().filter(r=>r.titulo===b.title) : [];
+        const posUsuario = reservas.findIndex(r=> r.user===user) + 1; // 0 -> não na fila
+        // ETA: menor data de vencimento entre loans ativos com mesmo título
+        let eta = '';
+        if(window.LoanStore){
+          const loansMesmoTitulo = LoanStore.getLoans().filter(l=> l.titulo===b.title);
+          if(loansMesmoTitulo.length){
+            const menor = loansMesmoTitulo.map(l=> new Date(l.vence)).sort((a,b)=> a-b)[0];
+            if(menor){ eta = menor.toISOString().slice(0,10); }
+          }
+        }
+        if(!eta){
+          const d = new Date(); d.setDate(d.getDate()+5); eta = d.toISOString().slice(0,10);
+        }
+        filaInfo = `<div class=\"mini\">Fila: ${reservas.length} ${posUsuario? '(sua pos. '+posUsuario+')':''} • ETA ${eta}</div>`;
+        reservarBtn = posUsuario ? `<button class=\"reserve-btn\" disabled>Na fila</button>` : `<button class=\"reserve-btn\" data-title=\"${b.title}\" data-user=\"${user}\">Reservar</button>`;
+      }
       return `<div class="book-card acervo-card" data-id="${b.id}">
         <div class="fav-btn ${fav}" data-id="${b.id}" title="Favorito">★</div>
         <img src="${b.img}" alt="Capa de ${b.title}">
@@ -151,6 +171,7 @@
           ${badgeDisp}
         </div>
         <div class="rate"><span class="stars">★</span>${b.rating}</div>
+        ${filaInfo}
         ${reservarBtn}
       </div>`;
     }).join('');
@@ -163,7 +184,11 @@
     if(e.target.classList.contains('reserve-btn')){
       const titulo = e.target.getAttribute('data-title');
       const user = e.target.getAttribute('data-user');
-      if(window.LoanStore){ LoanStore.reservarLivro(titulo, user); e.target.textContent='Reservado'; e.target.disabled=true; }
+      if(window.LoanStore){
+        const res = LoanStore.reservarLivro(titulo, user);
+        if(res.ok){ e.target.textContent='Reservado'; e.target.disabled=true; }
+        else { e.target.textContent = res.message; }
+      }
     }
   });
   // Logout

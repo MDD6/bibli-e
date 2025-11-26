@@ -1,0 +1,19 @@
+<section class="acervo-view">
+  <main class="grid acervo-grid">
+    <aside class="acervo-filtros">
+      <h2 class="block-title">Filtros</h2>
+      <div class="f-group"><label for="fBusca">Busca</label><input id="fBusca" type="text" placeholder="Título ou Autor" /></div>
+      <div class="f-group"><span class="f-label">Áreas</span><div class="check-list" id="fAreas"></div></div>
+      <div class="f-group"><span class="f-label">Séculos</span><div class="check-list" id="fSeculos"></div></div>
+      <div class="f-group"><label for="fOrdenar">Ordenar por</label>
+        <select id="fOrdenar"><option value="titulo">Título</option><option value="autor">Autor</option><option value="rating">Avaliação</option><option value="categoria">Área</option><option value="seculo">Século</option></select>
+      </div>
+      <div class="f-actions"><button id="btnLimpar" class="btn-go alt">Limpar</button></div>
+      <div class="fav-box"><h3>Favoritos</h3><div id="listaFavoritos" class="fav-list"></div></div>
+    </aside>
+    <section class="acervo-conteudo">
+      <div class="acervo-header"><h2 class="block-title">Acervo Completo</h2><div class="stats"><span id="totalCount">0 títulos</span><span id="dispCount">0 disponíveis</span></div></div>
+      <div id="livrosGrid" class="books acervo-books"></div>
+    </section>
+  </main>
+</section>

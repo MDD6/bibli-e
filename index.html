@@ -4,7 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Unifor Books — Biblioteca</title>
-  <link rel="stylesheet" href="styles.css"/>
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#0f172a" />
+  <link rel="stylesheet" href="styles/main.css"/>
 </head>
 <body>
   <div class="page">
@@ -19,13 +21,13 @@
       </div>
 
       <nav class="nav">
-        <a class="active" href="index.html">Início</a>
-        <a href="acervo.html">Acervo</a>
-        <a href="games.html">Games</a>
-        <a href="periodicos.html">Periódicos</a>
-        <a href="renovacao.html">Renovação</a>
-        <a href="emprestimos.html">Empréstimos</a>
-        <a href="historico.html">Histórico</a>
+        <a class="active" href="#" data-path="/">Início</a>
+        <a href="#" data-path="/acervo">Acervo</a>
+        <a href="#" data-path="/games">Games</a>
+        <a href="#" data-path="/periodicos">Periódicos</a>
+        <a href="#" data-path="/renovacao">Renovação</a>
+        <a href="#" data-path="/emprestimos">Empréstimos</a>
+        <a href="#" data-path="/historico">Histórico</a>
         <a href="#" id="logoutLink">Sair</a>
       </nav>
 
@@ -36,98 +38,21 @@
       </div>
     </header>
 
-    <!-- GRID PRINCIPAL -->
-    <main class="grid">
-      <!-- COLUNA ESQUERDA -->
-      <section class="left">
-        <!-- HERO -->
-        <div class="hero card">
-          <div class="hero-bg"
-               style="background-image:url('https://images.unsplash.com/photo-1544947950-fa07a98d237f?q=80&w=1200&auto=format&fit=crop');">
-            <div class="hero-overlay">
-              <h2>POETAS DO SÉCULO XIX</h2>
-              <p>Clássicos e obras de referência do acervo</p>
-            </div>
-          </div>
-
-          <div class="hero-footer">
-            <div class="author-pill">
-              <img src="https://picsum.photos/64?1" alt="autor"/>
-              <div>
-                <strong>Alexander</strong><br/>
-                Pushkin
-              </div>
-            </div>
-
-            <div class="mini-avatars">
-              <img src="https://picsum.photos/44?2" alt="a"/>
-              <img src="https://picsum.photos/44?3" alt="a"/>
-              <img src="https://picsum.photos/44?4" alt="a"/>
-              <img src="https://picsum.photos/44?5" alt="a"/>
-              <img src="https://picsum.photos/44?6" alt="a"/>
-              <img src="https://picsum.photos/44?7" alt="a"/>
-              <img src="https://picsum.photos/44?8" alt="a"/>
-            </div>
-          </div>
-
-          <!-- SEARCH BAR HERO -->
-          <div class="hero-search">
-            <div class="input icon">
-              🔎
-              <input id="q" type="text" placeholder="Search"/>
-            </div>
-
-            <select id="category">
-              <option value="">Área</option>
-              <option>Literatura</option>
-              <option>Poesia</option>
-              <option>Tecnologia</option>
-              <option>Direito</option>
-              <option>Medicina</option>
-              <option>Psicologia</option>
-              <option>Administração</option>
-              <option>Arquitetura</option>
-            </select>
-
-            <select id="century">
-              <option value="">Século</option>
-              <option>XVIII</option>
-              <option selected>XIX</option>
-              <option>XX</option>
-              <option>XXI</option>
-            </select>
-
-            <button id="go" class="btn-go">BUSCAR</button>
-          </div>
-        </div>
-
-        <!-- LAST REQUEST -->
-        <div class="last card">
-          <h3>Últimos Empréstimos</h3>
-          <div id="lastList" class="last-list"></div>
-        </div>
-      </section>
-
-      <!-- COLUNA DIREITA -->
-      <section class="right">
-        <!-- POPULAR WRITER -->
-        <div class="block">
-          <h3 class="block-title">Autores Populares</h3>
-          <div id="writers" class="writers"></div>
-        </div>
-
-        <!-- BOOKS -->
-        <div class="block">
-          <h3 class="block-title">Livros do Acervo</h3>
-          <div id="books" class="books"></div>
-        </div>
-      </section>
-    </main>
+    <!-- SPA APP CONTAINER -->
+    <main id="app"></main>
   </div>
 
-  <script src="auth.js"></script>
-  <script src="loanStore.js"></script>
-  <script>Auth.requireAuth(); const s=Auth.currentSession(); if(s){ const userEl=document.querySelector('.user .avatar'); userEl.setAttribute('title', s.user + ' ('+s.role+')'); } const oc=LoanStore.getOverdueCount(); if(oc>0){ const b=document.createElement('div'); b.className='overdue-banner'; b.textContent = `Você possui ${oc} empréstimo(s) em atraso.`; document.querySelector('.page').insertBefore(b, document.querySelector('main')); }</script>
-  <script src="script.js"></script>
+  <script src="scripts/auth.js"></script>
+  <script src="scripts/loanStore.js"></script>
+  <script src="scripts/router.js"></script>
+  <script src="scripts/search.js"></script>
+  <script src="scripts/notify.js"></script>
+  <script>
+    if('serviceWorker' in navigator){
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('service-worker.js').catch(console.error);
+      });
+    }
+  </script>
 </body>
 </html>
