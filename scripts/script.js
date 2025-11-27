@@ -27,6 +27,22 @@ let booksData = [
   { title: "Arquitetura Sustentável", author: "Ken Yeang", rating: 4.3, reviews: "11 k avaliações", category: "Arquitetura", century: "XXI", img: "https://images.unsplash.com/photo-1505842465776-3d90f616310d?q=80&w=800&auto=format&fit=crop" },
   { title: "Inteligência Artificial", author: "Russell & Norvig", rating: 4.8, reviews: "61 k avaliações", category: "Tecnologia", century: "XXI", img: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?q=80&w=800&auto=format&fit=crop" },
   { title: "Data Science Aplicada", author: "Provost & Fawcett", rating: 4.6, reviews: "32 k avaliações", category: "Tecnologia", century: "XXI", img: "https://images.unsplash.com/photo-1518186285589-2f7649de83e0?q=80&w=800&auto=format&fit=crop" }
+  ,
+  { title: "Cálculo Volume 1", author: "James Stewart", rating: 4.7, reviews: "58 k avaliações", category: "Matemática", century: "XX", img: "https://images.unsplash.com/photo-1509228468518-180dd4864904?q=80&w=800&auto=format&fit=crop" },
+  { title: "Algoritmos: Teoria e Prática", author: "Cormen et al.", rating: 4.8, reviews: "76 k avaliações", category: "Tecnologia", century: "XXI", img: "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=800&auto=format&fit=crop" },
+  { title: "Sistemas de Banco de Dados", author: "Elmasri & Navathe", rating: 4.6, reviews: "44 k avaliações", category: "Tecnologia", century: "XXI", img: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=800&auto=format&fit=crop" },
+  { title: "Microbiologia", author: "Prescott", rating: 4.5, reviews: "23 k avaliações", category: "Medicina", century: "XXI", img: "https://images.unsplash.com/photo-1581091014534-8987c1d647d5?q=80&w=800&auto=format&fit=crop" },
+  { title: "Farmacologia Básica e Clínica", author: "Katzung", rating: 4.6, reviews: "39 k avaliações", category: "Medicina", century: "XXI", img: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=800&auto=format&fit=crop" },
+  { title: "Marketing Management", author: "Philip Kotler", rating: 4.5, reviews: "47 k avaliações", category: "Administração", century: "XXI", img: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=800&auto=format&fit=crop" },
+  { title: "Arquitetura de Computadores", author: "Hennessy & Patterson", rating: 4.7, reviews: "28 k avaliações", category: "Tecnologia", century: "XXI", img: "https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=800&auto=format&fit=crop" },
+  { title: "Teoria Geral do Processo", author: "Fredie Didier Jr.", rating: 4.4, reviews: "17 k avaliações", category: "Direito", century: "XXI", img: "https://images.unsplash.com/photo-1555375771-14b2db2fd1b1?q=80&w=800&auto=format&fit=crop" },
+  { title: "Psicologia Social", author: "Elliot Aronson", rating: 4.6, reviews: "24 k avaliações", category: "Psicologia", century: "XXI", img: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=800&auto=format&fit=crop" },
+  { title: "História da Arte", author: "E. H. Gombrich", rating: 4.5, reviews: "31 k avaliações", category: "Arte", century: "XX", img: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop" },
+  { title: "Morte e Vida de Grandes Cidades", author: "Jane Jacobs", rating: 4.6, reviews: "19 k avaliações", category: "Arquitetura", century: "XX", img: "https://images.unsplash.com/photo-1508057198894-247b23fe5ade?q=80&w=800&auto=format&fit=crop" },
+  { title: "Sociologia", author: "Anthony Giddens", rating: 4.5, reviews: "36 k avaliações", category: "Sociologia", century: "XXI", img: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=800&auto=format&fit=crop" },
+  { title: "Química Orgânica", author: "Morrison & Boyd", rating: 4.4, reviews: "29 k avaliações", category: "Química", century: "XX", img: "https://images.unsplash.com/photo-1581092334651-ddf26d9a09a4?q=80&w=800&auto=format&fit=crop" },
+  { title: "Atlas de Anatomia Humana", author: "Netter", rating: 4.8, reviews: "62 k avaliações", category: "Medicina", century: "XXI", img: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=800&auto=format&fit=crop" },
+  { title: "Introdução à Economia", author: "N. Gregory Mankiw", rating: 4.6, reviews: "45 k avaliações", category: "Economia", century: "XXI", img: "https://images.unsplash.com/photo-1554224154-22dec7ec8818?q=80&w=800&auto=format&fit=crop" }
 ];
 
 const lastRequestData = [
